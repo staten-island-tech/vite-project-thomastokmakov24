@@ -24,14 +24,24 @@ document.querySelector('#app').innerHTML = `
 setupCounter(document.querySelector('#counter'))
 
 bookArray = [
-  { title: "The Joy Luck Club", author: "Amy Tan", year: 2000, read: true  }, //the idea is read is T=> mark as read and to read if False.
+  { title: "The Joy Luck Club", author: "Amy Tan", year: 2000, read: true , image: "https://i.pinimg.com/originals/7e/d7/52/7ed7521603385e27b5719b7699b31d47.jpg" }, //the idea is read is T=> mark as read and to read if False.
   { title: "The Summer Hikaru Died", author: "Mokumokuren", year: 2023, read: true },
   { title: "1984", author: "George Orwell", year: 1949, read: false },
   { title: "DBZ", author: "Akira Toriyama", year: 1989, read: false },
   { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: true },
 ];
-
+//images book covers.
 readbucket = [];
 toreadbucket = [];
 
-
+bookArray.forEach(slip)
+function slip(book) {
+  if (book.read) {
+    readbucket.push(book);
+  } else {
+    toreadbucket.push(book);
+  }
+}
+console.log("Books Read:", readbucket);
+console.log("Books To Read:", toreadbucket);
+slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
