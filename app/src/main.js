@@ -25,12 +25,25 @@ setupCounter(document.querySelector('#counter'))
 
 bookArray = [
   { title: "The Joy Luck Club", author: "Amy Tan", year: 2000, read: true , image: "https://i.pinimg.com/originals/7e/d7/52/7ed7521603385e27b5719b7699b31d47.jpg" }, //the idea is read is T=> mark as read and to read if False.
-  { title: "The Summer Hikaru Died", author: "Mokumokuren", year: 2023, read: true },
-  { title: "1984", author: "George Orwell", year: 1949, read: false },
-  { title: "DBZ", author: "Akira Toriyama", year: 1989, read: false },
-  { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: true },
+  { title: "The Summer Hikaru Died", author: "Mokumokuren", year: 2023, read: true, image: "https://th.bing.com/th/id/OIP.BoehT_tAJalkya1TIoraGAHaKe?w=186&h=263&c=7&r=0&o=7&pid=1.7&rm=3" },
+  { title: "1984", author: "George Orwell", year: 1949, read: false , image: "https://th.bing.com/th/id/OIP.er1VXwv6qs9hs5SAsjJ-XwHaMi?w=186&h=315&c=7&r=0&o=7&pid=1.7&rm=3"},
+  { title: "DBZ", author: "Akira Toriyama", year: 1989, read: false, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
+  { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: true, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
 ];
-//images book covers.
+//images book covers. Put the two lists on screen preferrableyside by side but top and bottom is fine. Have 
+function inject(cry) {
+  const container = document.querySelector(".container");
+  container.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card" data-genre="${cry.genre}"  data-cardPrice="${cry.cardPrice}"data-cardHeader="${cry.cardHeader}">
+        <img class="cardImg" src=${cry.cardImg} alt="mimimimimi"/>
+        <button class = "btn">SGN</button>
+        <h2 >${cry.cardHeader}</h2> 
+        <h2 class = "cardPrice" >${cry.cardPrice}</h2>
+        </div>`,
+  );
+}
+
 readbucket = [];
 toreadbucket = [];
 
