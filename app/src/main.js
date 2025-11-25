@@ -35,9 +35,9 @@ function inject(cry) {
   const container = document.querySelector(".container");
   container.insertAdjacentHTML(
     "afterbegin",
-    `<div class="card" data-genre="${cry.genre}"  data-cardPrice="${cry.cardPrice}"data-cardHeader="${cry.cardHeader}">
-        <img class="cardImg" src=${cry.cardImg} alt="mimimimimi"/>
-        <button class = "btn">SGN</button>
+    `<div class="card" data-title="${cry.title}"  data-author="${cry.author}"data-year="${cry.year}" data-read="${cry.read}" data-image="${cry.image}">
+        <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
+        <button class = "btn">Cycle</button>
         <h2 >${cry.cardHeader}</h2> 
         <h2 class = "cardPrice" >${cry.cardPrice}</h2>
         </div>`,
@@ -57,4 +57,10 @@ function slip(book) {
 }
 console.log("Books Read:", readbucket);
 console.log("Books To Read:", toreadbucket);
+
+
+
+
+
+
 slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
