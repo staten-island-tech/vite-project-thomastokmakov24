@@ -64,3 +64,26 @@ console.log("Books To Read:", toreadbucket);
 
 
 slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
