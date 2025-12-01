@@ -43,9 +43,26 @@ function inject(cry) {
         </div>`,
   );
 }
+tobuybucket = [];toreadbucket = [];currentbucket = [];readbucket = [];againbucket = [];
 
-readbucket = [];
-toreadbucket = [];
+function cycle(_____) {
+  if ((book.read) == 1) {
+    tobuybucket.push(book);
+    /* x++; */}
+    else if ((book.read) == 2) {
+      toreadbucket.push(book);
+      }
+      else if ((book.read) == 3) {
+        currentbucket.push(book);
+        }
+        else if ((book.read) == 4) {
+          readbucket.push(book);
+          }
+          else if ((book.read) == 5) {
+            againbucket.push(book);
+            }
+
+
 
 bookArray.forEach(slip)
 function slip(book) {
