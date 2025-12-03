@@ -46,7 +46,7 @@ function inject(cry) {
 let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
 
 //bookArray.forEach(book)
-function cycle(_____) {
+function cycle(book) {
   if ((book.read) == 1) {
     tobuybucket.push(book);
     /* x++; */}
@@ -67,7 +67,8 @@ function cycle(_____) {
 
 
 
-cycle(bookArray.forEach(book));
+//cycle(bookArray.forEach(book));
+bookArray.forEach(cycle);//GPT WAS HELPED WITH THIS ONE ^^^^^^^^
 
 console.log("Books To Buy:", tobuybucket);
 console.log("Books Currently Reading:", currentbucket);
@@ -80,7 +81,7 @@ console.log("Books To Read:", toreadbucket);
 
 
 
-slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
+//slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
 
 
 
