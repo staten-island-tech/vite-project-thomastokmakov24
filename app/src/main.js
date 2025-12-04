@@ -30,6 +30,23 @@ const bookArray = [
   { title: "DBZ", author: "Akira Toriyama", year: 1989, read: 4, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
   { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: 5, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
 ];
+/* const listEl = document.getElementById("character-list");
+
+bookArray.forEach(book => {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = `
+    <h3>${book.title}</h3>
+    <img src="${book.img}" alt="${book.name}" width="80">
+
+    <div>Strength:</div>
+    <div class="stat-bar" style="width: ${book.strength}px;"></div>
+
+    <div>Speed:</div>
+    <div class="stat-bar" style="width: ${book.speed}px;"></div>
+  `;
+
+  listEl.appendChild(wrapper);
+}); */
 //images book covers. Put the two lists on screen preferrableyside by side but top and bottom is fine. Have 
 function inject(cry) {
   const container = document.querySelector(".container");
@@ -37,12 +54,15 @@ function inject(cry) {
     "afterbegin",
     `<div class="card" data-title="${cry.title}"  data-author="${cry.author}"data-year="${cry.year}" data-read="${cry.read}" data-image="${cry.image}">
         <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
-        <button class = "btn">Cycle</button>
-        <h2 >${cry.cardHeader}</h2> 
-        <h2 class = "cardPrice" >${cry.cardPrice}</h2>
+        <button class = "btn">FakeCycle</button>
+        <h2 >${cry.title}</h2>         <h2 >First Released:${cry.year}</h2>    
+        <h2 class = "cardPrice" >${cry.author}</h2>
         </div>`,
   );
-}
+} 
+bookArray.forEach((book) => {
+  inject(book);
+});
 let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
 
 //bookArray.forEach(book)
