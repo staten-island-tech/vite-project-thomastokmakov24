@@ -1,27 +1,29 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+    // <a href="https://vite.dev" target="_blank">
+    //   <img src="${viteLogo}" class="logo" alt="Vite logo" />
+    // </a>
+    // <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
+    //   <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
+    // </a>
+    // <h1>Hello Vite!</h1>
+
+    //     <p class="read-the-docs">
+    //   Click on the Vite logo to learn more
+    // </p>//     <button id="counter" type="button"></button>
+// document.querySelector('#app').innerHTML = `
+//   <div >
+//     <div class="card">
+   
+//     </div>
+
+
+//   </div>
+// `
 //meme plan out. find the things. display it it. Select one and not save to a list. Add text. output the meme with the text on the image. Text content. You can use url to do videos and pictures. 
-setupCounter(document.querySelector('#counter'))
+
 
 const bookArray = [
   { title: "The Joy Luck Club", author: "Amy Tan", year: 2000, read: 1 , image: "https://i.pinimg.com/originals/7e/d7/52/7ed7521603385e27b5719b7699b31d47.jpg" }, //the idea is read is T=> mark as read and to read if False.
@@ -30,6 +32,7 @@ const bookArray = [
   { title: "DBZ", author: "Akira Toriyama", year: 1989, read: 4, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
   { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: 5, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
 ];
+const cyclefunc = document.getElementById("CycleBuT-T");
 /* const listEl = document.getElementById("character-list");
 
 bookArray.forEach(book => {
@@ -88,7 +91,7 @@ function cycle(book) {
 
 
 //cycle(bookArray.forEach(book));
-bookArray.forEach(cycle);//GPT WAS HELPED WITH THIS ONE ^^^^^^^^
+bookArray.forEach((button)/+/GPT WAS HELPED WITH THIS ONE (just how to call it)
 
 console.log("Books To Buy:", tobuybucket);
 console.log("Books Currently Reading:", currentbucket);
@@ -98,9 +101,7 @@ console.log("Books To Read:", toreadbucket);
 
 
 
-
-
-
+bookArray.forEach(cycle);
 //slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
 
 
