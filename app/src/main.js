@@ -58,7 +58,9 @@ function inject(cry) {
     `<div class="card" data-title="${cry.title}"  data-author="${cry.author}"data-year="${cry.year}" data-read="${cry.read}" data-image="${cry.image}">
         <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
         <button class = "btn">FakeCycle</button>
-        <h2 >${cry.title}</h2>         <h2 >First Released:${cry.year}</h2>    
+        <div class="cycleDisplay">Cycle: <span class="cycleNum">${cry.read}</span></div>
+        <h2 >${cry.title}</h2>         
+        <h2 >Released:${cry.year}</h2>    
         <h2 class = "cardPrice" >${cry.author}</h2>
         </div>`,
   );
@@ -67,7 +69,66 @@ bookArray.forEach((book) => {
   inject(book);
 });
 let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
+//latest thing v
+// function cyclebutton() {
+//   const button = document.querySelectorAll(".btn");
+//   button.forEach((button) => {
+//   //  let stored = 0
+//   button.addEventListener("click", e => {
+//     const card = e.target.closest(".card");
+//     const name = card.getAttribute("data-title");
+//     const price = Number(card.getAttribute("data-read"));
+//     price += 1;
+function rebuildBuckets() {
+  tobuybucket = []; toreadbucket = []; currentbucket = []; readbucket = []; againbucket = [];
+  bookArray.forEach(book => {
+    const r = Number(book.read) || 1;
+    if (r === 1) tobuybucket.push(book);
+    else if (r === 2) toreadbucket.push(book);
+    else if (r === 3) currentbucket.push(book);
+    else if (r === 4) readbucket.push(book);
+    else if (r === 5) againbucket.push(book);
+  });
+}
 
+// find book object by title (assumes titles unique)
+function findBookByTitle(title) {
+  return bookArray.find(b => b.title === title);
+}
+
+// single delegated listener for all cycle buttons
+const container = document.querySelector(".container");
+container.addEventListener("click", (e) => {
+  if (!e.target.matches(".btn")) return;
+  const card = e.target.closest(".card");
+  if (!card) return;
+
+  const title = card.dataset.title;
+  const book = findBookByTitle(title);
+  if (!book) return;
+
+  // increment and wrap to 1..5
+  book.read = (Number(book.read) % 5) + 1;
+
+  // update DOM metadata on this card
+  card.dataset.read = String(book.read);
+  const numEl = card.querySelector(".cycleNum");
+  if (numEl) numEl.textContent = String(book.read);
+
+  // rebuild buckets so lists stay correct
+  rebuildBuckets();
+
+  // (optional) debug output
+  console.log("Books To Buy:", tobuybucket);
+  console.log("Books To Read:", toreadbucket);
+  console.log("Books Currently Reading:", currentbucket);
+  console.log("Books Read:", readbucket);
+  console.log("Books To Read Again:", againbucket);
+});
+
+// initial bucket population
+rebuildBuckets();
+//all the stuff above is HR
 //bookArray.forEach(book)
 function cycle(book) {
   if ((book.read) == 1) {
@@ -91,7 +152,7 @@ function cycle(book) {
 
 
 //cycle(bookArray.forEach(book));
-bookArray.forEach((button)/+/GPT WAS HELPED WITH THIS ONE (just how to call it)
+bookArray.forEach(button)//GPT WAS HELPED WITH THIS ONE (just how to call it)
 
 console.log("Books To Buy:", tobuybucket);
 console.log("Books Currently Reading:", currentbucket);
