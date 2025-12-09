@@ -32,7 +32,7 @@ const bookArray = [
   { title: "DBZ", author: "Akira Toriyama", year: 1989, read: 4, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
   { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: 5, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
 ];
-const cyclefunc = document.getElementById("CycleBuT-T");
+const containerEl = document.querySelector(".container");
 /* const listEl = document.getElementById("character-list");
 
 bookArray.forEach(book => {
@@ -68,6 +68,11 @@ function inject(cry) {
 bookArray.forEach((book) => {
   inject(book);
 });
+
+// set explicit columns: one column per object (single row). Change 220px if you change .card width.
+containerEl.style.gridTemplateColumns = `repeat(${bookArray.length}, 220px)`;
+// optional: set the gridAutoRows to keep card heights flexible
+containerEl.style.gridAutoRows = "minmax(200px, auto)";
 let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
 //latest thing v
 // function cyclebutton() {
@@ -125,7 +130,16 @@ container.addEventListener("click", (e) => {
   console.log("Books Read:", readbucket);
   console.log("Books To Read Again:", againbucket);
 });
-
+function setupFilterButtons() {
+  const filterButtons = document.querySelectorAll(".fbtn");
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.genre;
+      filterByGenre(category);
+    });
+  });
+}
+setupFilterButtons();
 // initial bucket population
 rebuildBuckets();
 //all the stuff above is HR

@@ -24,13 +24,35 @@ h2 {
   margin: 0%;
   padding: 0%;
 }
-.container {
+/* .container {
     width: 100%;
     background-color:rgba(255, 140, 0, 0.993);
     margin: 0% auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+} */
+ .container {
+/*     width: 100%;
+    background-color:rgba(255, 140, 0, 0.993);
+    margin: 0% auto;
+    display: flex;
+    justify-content: center;
+   flex-wrap: wrap; */
+ /* Make the container a grid so we can size it from JS based on number of objects.
++     grid-auto-flow: column + gridAutoColumns keeps cards in columns and lets us
++     control the number / width via JS (or let it auto-fill). */
+  width: auto; /* JS will set explicit columns if you want */
+  max-width: 100%;
+  background-color: rgba(255, 140, 0, 0.993);
+  margin: 0 auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 220px; /* default card width */
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem;
+  overflow-x: auto; /* allow horizontal scroll if many cards */
 }
 .Cart {
     width: 100%;
@@ -92,6 +114,21 @@ a:hover {
   color: #535bf2;
 }
 
+.fbtn {
+  background-color: rgb(255, 189, 109);
+  color: white;
+  padding: 10px;
+  max-height: 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;}
+button:hover {
+  background-color: darkblue;
+  transform: scale(1.25);
+  box-shadow: 0 4px 8px rgba(50, 58, 209, 0.2);
+  margin: 0px;
+}
 body {
   margin: 0;
   display: flex;
@@ -101,7 +138,7 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 1.2em;
   line-height: 1.1;
 }
 
@@ -131,7 +168,16 @@ h1 {
 }
 
 .card {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  width: 220px; /* fixed card width so container sizing is predictable */
+  min-height: 320px;
+  background-color: lightpink;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+/*     box-sizing: border-box;
     width:22% ;
     height: 400px ;
     background-color: lightpink;
