@@ -1,7 +1,7 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-
+go to NodeList.js.org. change dropdoiwn to 20 or anything that says localStorage. 
     // <a href="https://vite.dev" target="_blank">
     //   <img src="${viteLogo}" class="logo" alt="Vite logo" />
     // </a>
@@ -51,29 +51,63 @@ bookArray.forEach(book => {
   listEl.appendChild(wrapper);
 }); */
 //images book covers. Put the two lists on screen preferrableyside by side but top and bottom is fine. Have 
+let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
+function readLabelFromValue(v) {
+  switch (Number(v)) {
+    case 1: return "tobuy";
+    case 2: return "toread";
+    case 3: return "current";
+    case 4: return "read";
+    case 5: return "again";
+    default: return "tobuy";
+  }
+}
 function inject(cry) {
-  const container = document.querySelector(".container");
-  container.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card" data-title="${cry.title}"  data-author="${cry.author}"data-year="${cry.year}" data-read="${cry.read}" data-image="${cry.image}">
-        <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
-        <button class = "btn">FakeCycle</button>
-        <div class="cycleDisplay">Cycle: <span class="cycleNum">${cry.read}</span></div>
-        <h2 >${cry.title}</h2>         
-        <h2 >Released:${cry.year}</h2>    
-        <h2 class = "cardPrice" >${cry.author}</h2>
-        </div>`,
+  const stateLabel = readLabelFromValue(cry.read);
+  containerEl.insertAdjacentHTML(
+    "beforeend",
+    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${stateLabel}" data-image="${cry.image}">
+        <img class="cardImg" src="${cry.image}" alt="${escapeHtml(cry.title)}"/>
+        <button class="btn">FakeCycle</button>
+        <div class="stateDisplay"><span class="stateLabel">${stateLabel}</span></div>
+        <h2>${escapeHtml(cry.title)}</h2>
+        <h2>Released: ${cry.year}</h2>
+        <h2 class="cardPrice">${escapeHtml(cry.author)}</h2>
+      </div>`
   );
-} 
+}
+function renderBooks(list = bookArray) {
+  containerEl.innerHTML = ""; // remove existing cards (keeps control buttons if they live elsewhere)
+  // If your control buttons are inside the same container, ensure they are re-inserted or move controls outside container.
+  list.forEach(inject);
+  // keep grid columns consistent with how many cards are shown
+  containerEl.style.gridTemplateColumns = `repeat(${Math.max(1, list.length)}, 220px)`;
+  containerEl.style.gridAutoRows = "minmax(200px, auto)";
+}
+
+// function inject(cry) {
+//   const container = document.querySelector(".container");
+//   container.insertAdjacentHTML(
+//     "afterbegin",
+//     `<div class="card" data-title="${cry.title}"  data-author="${cry.author}"data-year="${cry.year}" data-read="${cry.read}" data-image="${cry.image}">
+//         <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
+//         <button class = "btn">FakeCycle</button>
+//         <div class="cycleDisplay">Cycle: <span class="cycleNum">${cry.read}</span></div>
+//         <h2 >${cry.title}</h2>         
+//         <h2 >Released:${cry.year}</h2>    
+//         <h2 class = "cardPrice" >${cry.author}</h2>
+//         </div>`,
+//   );
+// } 
 bookArray.forEach((book) => {
   inject(book);
 });
-
+readLabelFromValue();
 // set explicit columns: one column per object (single row). Change 220px if you change .card width.
 containerEl.style.gridTemplateColumns = `repeat(${bookArray.length}, 220px)`;
 // optional: set the gridAutoRows to keep card heights flexible
 containerEl.style.gridAutoRows = "minmax(200px, auto)";
-let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
+
 //latest thing v
 // function cyclebutton() {
 //   const button = document.querySelectorAll(".btn");
