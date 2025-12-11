@@ -1,7 +1,7 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-go to NodeList.js.org. change dropdoiwn to 20 or anything that says localStorage. 
+//go to NodeList.js.org. change dropdoiwn to 20 or anything that says localStorage. 
     // <a href="https://vite.dev" target="_blank">
     //   <img src="${viteLogo}" class="logo" alt="Vite logo" />
     // </a>
@@ -61,15 +61,15 @@ function readLabelFromValue(v) {
     case 5: return "again";
     default: return "tobuy";
   }
-}
+}   //     <div class="stateDisplay"><span class="stateLabel">${label}</span></div>
 function inject(cry) {
   const stateLabel = readLabelFromValue(cry.read);
   containerEl.insertAdjacentHTML(
     "beforeend",
-    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${stateLabel}" data-image="${cry.image}">
+    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${label}" data-image="${cry.image}">
         <img class="cardImg" src="${cry.image}" alt="${escapeHtml(cry.title)}"/>
         <button class="btn">FakeCycle</button>
-        <div class="stateDisplay"><span class="stateLabel">${stateLabel}</span></div>
+
         <h2>${escapeHtml(cry.title)}</h2>
         <h2>Released: ${cry.year}</h2>
         <h2 class="cardPrice">${escapeHtml(cry.author)}</h2>
@@ -234,4 +234,22 @@ bookArray.forEach(cycle);
 
 
 
+/*  
+// async function getData(){
+try{
+  const response = await fetch(`https://`);//go get data
+  if(response.status != 200){
+    throw new Error (response);
+  } else{const data = await response.json();
+   console.log(data);
+   document.getElementById("api-response").textContent = data.name; `
+   }// makses the repsons into json data we can use
+}catch(error){
+  console.log(error)            }
+}}getData();
 
+///data.__.forEach...
+
+
+//flowbite, DaisyUi, tailwind component library
+*/
