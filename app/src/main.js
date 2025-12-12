@@ -63,10 +63,10 @@ function readLabelFromValue(v) {
   }
 }   //     <div class="stateDisplay"><span class="stateLabel">${label}</span></div>
 function inject(cry) {
-  const stateLabel = readLabelFromValue(cry.read);
+  const numberv = readLabelFromValue(cry.read);
   containerEl.insertAdjacentHTML(
     "beforeend",
-    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${label}" data-image="${cry.image}">
+    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${numberv}" data-image="${cry.image}">
         <img class="cardImg" src="${cry.image}" alt="${escapeHtml(cry.title)}"/>
         <button class="btn">FakeCycle</button>
 
@@ -99,71 +99,86 @@ function renderBooks(list = bookArray) {
 //         </div>`,
 //   );
 // } 
-bookArray.forEach((book) => {
-  inject(book);
-});
-readLabelFromValue();
-// set explicit columns: one column per object (single row). Change 220px if you change .card width.
-containerEl.style.gridTemplateColumns = `repeat(${bookArray.length}, 220px)`;
-// optional: set the gridAutoRows to keep card heights flexible
-containerEl.style.gridAutoRows = "minmax(200px, auto)";
-
-//latest thing v
-// function cyclebutton() {
-//   const button = document.querySelectorAll(".btn");
-//   button.forEach((button) => {
-//   //  let stored = 0
-//   button.addEventListener("click", e => {
-//     const card = e.target.closest(".card");
-//     const name = card.getAttribute("data-title");
-//     const price = Number(card.getAttribute("data-read"));
-//     price += 1;
+//bookArray.forEach((book) => {
+//  inject(book);
+//});\
 function rebuildBuckets() {
-  tobuybucket = []; toreadbucket = []; currentbucket = []; readbucket = []; againbucket = [];
+  tobuybucket = [];
+  toreadbucket = [];
+  currentbucket = [];
+  readbucket = [];
+  againbucket = [];
+
   bookArray.forEach(book => {
-    const r = Number(book.read) || 1;
-    if (r === 1) tobuybucket.push(book);
-    else if (r === 2) toreadbucket.push(book);
-    else if (r === 3) currentbucket.push(book);
-    else if (r === 4) readbucket.push(book);
-    else if (r === 5) againbucket.push(book);
+    let r = Number(book.read) || 1;
+    if (r < 1 || r > 5) { r = 1; book.read = 1; }
+    const label = readLabelFromValue(r);
+    if (label === "tobuy") tobuybucket.push(book);
+    else if (label === "toread") toreadbucket.push(book);
+    else if (label === "current") currentbucket.push(book);
+    else if (label === "read") readbucket.push(book);
+    else if (label === "again") againbucket.push(book);
   });
 }
-
-// find book object by title (assumes titles unique)
 function findBookByTitle(title) {
   return bookArray.find(b => b.title === title);
 }
+// function findBookByTitle(title) {
+//   return bookArray.find(b => b.title === title);
+// }
 
-// single delegated listener for all cycle buttons
-const container = document.querySelector(".container");
-container.addEventListener("click", (e) => {
+// update only the card UI for one book
+function updateCardDisplay(card, book) {
+  card.dataset.read = String(book.read);
+  const labelEl = card.querySelector('.stateLabel');
+  if (labelEl) labelEl.textContent = readLabelFromValue(book.read);
+  card.dataset.state = readLabelFromValue(book.read);
+}
+
+// delegated click listener for per-card FakeCycle button
+containerEl.addEventListener("click", (e) => {
   if (!e.target.matches(".btn")) return;
   const card = e.target.closest(".card");
   if (!card) return;
-
   const title = card.dataset.title;
   const book = findBookByTitle(title);
   if (!book) return;
 
-  // increment and wrap to 1..5
+  // increment and wrap 1..5
   book.read = (Number(book.read) % 5) + 1;
 
-  // update DOM metadata on this card
-  card.dataset.read = String(book.read);
-  const numEl = card.querySelector(".cycleNum");
-  if (numEl) numEl.textContent = String(book.read);
-
-  // rebuild buckets so lists stay correct
+  // update this card and buckets
+  updateCardDisplay(card, book);
   rebuildBuckets();
-
-  // (optional) debug output
-  console.log("Books To Buy:", tobuybucket);
-  console.log("Books To Read:", toreadbucket);
-  console.log("Books Currently Reading:", currentbucket);
-  console.log("Books Read:", readbucket);
-  console.log("Books To Read Again:", againbucket);
 });
+// // function findBookByTitle(title) {
+// //   return bookArray.find(b => b.title === title);
+// // }
+
+// // update only the card UI for one book
+// function updateCardDisplay(card, book) {
+//   card.dataset.read = String(book.read);
+//   const labelEl = card.querySelector('.stateLabel');
+//   if (labelEl) labelEl.textContent = readLabelFromValue(book.read);
+//   card.dataset.state = readLabelFromValue(book.read);
+// }
+
+// // delegated click listener for per-card FakeCycle button
+// containerEl.addEventListener("click", (e) => {
+//   if (!e.target.matches(".btn")) return;
+//   const card = e.target.closest(".card");
+//   if (!card) return;
+//   const title = card.dataset.title;
+//   const book = findBookByTitle(title);
+//   if (!book) return;
+
+//   // increment and wrap 1..5
+//   book.read = (Number(book.read) % 5) + 1;
+
+//   // update this card and buckets
+//   updateCardDisplay(card, book);
+//   rebuildBuckets();
+//});
 function setupFilterButtons() {
   const filterButtons = document.querySelectorAll(".fbtn");
   filterButtons.forEach((button) => {
@@ -173,47 +188,131 @@ function setupFilterButtons() {
     });
   });
 }
-setupFilterButtons();
-// initial bucket population
+
+// small helper to escape text into HTML attributes
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// initial setup
 rebuildBuckets();
-//all the stuff above is HR
-//bookArray.forEach(book)
-function cycle(book) {
-  if ((book.read) == 1) {
-    tobuybucket.push(book);
-    /* x++; */}
-    else if ((book.read) == 2) {
-      toreadbucket.push(book);
-      }
-      else if ((book.read) == 3) {
-        currentbucket.push(book);
-        }
-        else if ((book.read) == 4) {
-          readbucket.push(book);
-          }
-          else if ((book.read) == 5) {
-            againbucket.push(book);
-            }
-            else if ((book.read) > 5) {
-              book.read = 1;}  }
+renderBooks(); // show all by default
+setupFilterButtons();
+// //readLabelFromValue();
+// // set explicit columns: one column per object (single row). Change 220px if you change .card width.
+// //containerEl.style.gridTemplateColumns = `repeat(${bookArray.length}, 220px)`;
+// // optional: set the gridAutoRows to keep card heights flexible
+// //containerEl.style.gridAutoRows = "minmax(200px, auto)";
+
+// //latest thing v
+// // function cyclebutton() {
+// //   const button = document.querySelectorAll(".btn");
+// //   button.forEach((button) => {
+// //   //  let stored = 0
+// //   button.addEventListener("click", e => {
+// //     const card = e.target.closest(".card");
+// //     const name = card.getAttribute("data-title");
+// //     const price = Number(card.getAttribute("data-read"));
+// //     price += 1;
+// function rebuildBuckets() {
+//   tobuybucket = []; toreadbucket = []; currentbucket = []; readbucket = []; againbucket = [];
+//   bookArray.forEach(book => {
+//     const r = Number(book.read) || 1;
+//     if (r === 1) tobuybucket.push(book);
+//     else if (r === 2) toreadbucket.push(book);
+//     else if (r === 3) currentbucket.push(book);
+//     else if (r === 4) readbucket.push(book);
+//     else if (r === 5) againbucket.push(book);
+//   });
+// }
+
+// // find book object by title (assumes titles unique)
+// function findBookByTitle(title) {
+//   return bookArray.find(b => b.title === title);
+// }
+
+// // single delegated listener for all cycle buttons
+// const container = document.querySelector(".container");
+// container.addEventListener("click", (e) => {
+//   if (!e.target.matches(".btn")) return;
+//   const card = e.target.closest(".card");
+//   if (!card) return;
+
+//   const title = card.dataset.title;
+//   const book = findBookByTitle(title);
+//   if (!book) return;
+
+//   // increment and wrap to 1..5
+//   book.read = (Number(book.read) % 5) + 1;
+
+//   // update DOM metadata on this card
+//   card.dataset.read = String(book.read);
+//   const numEl = card.querySelector(".cycleNum");
+//   if (numEl) numEl.textContent = String(book.read);
+
+//   // rebuild buckets so lists stay correct
+//   rebuildBuckets();
+
+//   // (optional) debug output
+//   console.log("Books To Buy:", tobuybucket);
+//   console.log("Books To Read:", toreadbucket);
+//   console.log("Books Currently Reading:", currentbucket);
+//   console.log("Books Read:", readbucket);
+//   console.log("Books To Read Again:", againbucket);
+// });
+// function setupFilterButtons() {
+//   const filterButtons = document.querySelectorAll(".fbtn");
+//   filterButtons.forEach((button) => {
+//     button.addEventListener("click", () => {
+//       const category = button.dataset.genre;
+//       filterByGenre(category);
+//     });
+//   });
+// }
+// setupFilterButtons();
+// // initial bucket population
+// rebuildBuckets();
+// //all the stuff above is HR
+// //bookArray.forEach(book)
+// function cycle(book) {
+//   if ((book.read) == 1) {
+//     tobuybucket.push(book);
+//     /* x++; */}
+//     else if ((book.read) == 2) {
+//       toreadbucket.push(book);
+//       }
+//       else if ((book.read) == 3) {
+//         currentbucket.push(book);
+//         }
+//         else if ((book.read) == 4) {
+//           readbucket.push(book);
+//           }
+//           else if ((book.read) == 5) {
+//             againbucket.push(book);
+//             }
+//             else if ((book.read) > 5) {
+//               book.read = 1;}  }
 
 
 
-//cycle(bookArray.forEach(book));
-bookArray.forEach(button)//GPT WAS HELPED WITH THIS ONE (just how to call it)
+// //cycle(bookArray.forEach(book));
+// bookArray.forEach(button)//GPT WAS HELPED WITH THIS ONE (just how to call it)
 
-console.log("Books To Buy:", tobuybucket);
-console.log("Books Currently Reading:", currentbucket);
-console.log("Books To Read Again:", againbucket);
-console.log("Books Read:", readbucket);
-console.log("Books To Read:", toreadbucket);
-
-
-
-bookArray.forEach(cycle);
-//slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
+// console.log("Books To Buy:", tobuybucket);
+// console.log("Books Currently Reading:", currentbucket);
+// console.log("Books To Read Again:", againbucket);
+// console.log("Books Read:", readbucket);
+// console.log("Books To Read:", toreadbucket);
 
 
+
+// bookArray.forEach(cycle);
+// //slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
 
 
 
@@ -234,22 +333,24 @@ bookArray.forEach(cycle);
 
 
 
-/*  
-// async function getData(){
-try{
-  const response = await fetch(`https://`);//go get data
-  if(response.status != 200){
-    throw new Error (response);
-  } else{const data = await response.json();
-   console.log(data);
-   document.getElementById("api-response").textContent = data.name; `
-   }// makses the repsons into json data we can use
-}catch(error){
-  console.log(error)            }
-}}getData();
-
-///data.__.forEach...
 
 
-//flowbite, DaisyUi, tailwind component library
-*/
+// /*  
+// // async function getData(){
+// try{
+//   const response = await fetch(`https://`);//go get data
+//   if(response.status != 200){
+//     throw new Error (response);
+//   } else{const data = await response.json();
+//    console.log(data);
+//    document.getElementById("api-response").textContent = data.name; `
+//    }// makses the repsons into json data we can use
+// }catch(error){
+//   console.log(error)            }
+// }}getData();
+
+// ///data.__.forEach...
+
+
+// //flowbite, DaisyUi, tailwind component library
+// */
