@@ -31,6 +31,30 @@ const bookArray = [
   { title: "1984", author: "George Orwell", year: 1949, read: 3 , image: "https://th.bing.com/th/id/OIP.er1VXwv6qs9hs5SAsjJ-XwHaMi?w=186&h=315&c=7&r=0&o=7&pid=1.7&rm=3"},
   { title: "DBZ", author: "Akira Toriyama", year: 1989, read: 4, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
   { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: 5, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
+  { 
+  title: "The Warded Man", 
+  author: "Peter V. Brett", 
+  year: 2008, 
+  read: 3, 
+  image: "https://th.bing.com/th/id/OIP.dUz9zTTw2cAQFoYXjABfdAHaLH?w=130&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1https://th.bing.com/th/id/OIP.aJ5vwSboBJdJh3Ry7SqXoQHaH_?w=203&h=219&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
+},
+
+{ 
+  title: "Frieren: Beyond Journey’s End", 
+  author: "Kanehito Yamada", 
+  year: 2020, 
+  read: 5, 
+  image: "https://th.bing.com/th/id/OIP.MyaFr4d_d3gupaRWVsJR9wHaLH?w=203&h=304&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
+},
+
+{ 
+  title: "Chainsaw Man", 
+  author: "Tatsuki Fujimoto", 
+  year: 2018, 
+  read: 2, 
+  image: "https://th.bing.com/th/id/OIP.B1SPIi7WfsggDibRU6t_LQHaLh?w=115&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
+}
+
 ];
 const containerEl = document.querySelector(".container");
 /* const listEl = document.getElementById("character-list");
@@ -133,8 +157,8 @@ function updateCardDisplay(card, book) {
   const labelEl = card.querySelector('.stateLabel');
   if (labelEl) labelEl.textContent = readLabelFromValue(book.read);
   card.dataset.state = readLabelFromValue(book.read);
-}
 
+}
 // delegated click listener for per-card FakeCycle button
 containerEl.addEventListener("click", (e) => {
   if (!e.target.matches(".btn")) return;
@@ -198,7 +222,7 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
-
+//all cards disappear w/o this
 // initial setup
 rebuildBuckets();
 renderBooks(); // show all by default
