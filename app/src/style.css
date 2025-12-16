@@ -232,3 +232,38 @@ button:focus-visible {
     background-color: #2e40c7;
   }
 }
+/* html land = "en"
+ head 
+   meta carset
+   meta name = "viewport" content = "width=device-width, initial-scale=1.0
+   title>document<
+   head
+   body
+   div class="publishers"
+   div class="games"
+   <scipt src="sample.js"><>
+   body 
+   html 
+   
+   js'
+   plublishers = {};
+   videogames.foreach((game) => {
+   let studio = game.studio;
+   if (!publishers[studio]){   //same as publishers.nintendo but this as a variable
+    publishers[studio] =1;
+}else{ publishers[studio] = publishers[studio] +1;
+}
+});
+for(let publisher in publishers){
+let publishDiv = document.quelrySelector('.publishers');//now you can try to log
+publishDiv.insertAdjacentHtml("afterbegin", `div class = "publisher-container">
+<h2 class = publisher>${publisher}</h2>
+h3 class = "amount" >${publishers[publisher]}<h3>
+</div>`);
+} videogames.filter((game) => game.ratings.metacritic > 95 ).foreach((game)
+=> document.queryselectror(".games")
+.insertAdjacenthtml("afterbegin, `h2 ${game.title} </h2>`));
+console.log(publishers);  //this is test to know data is correct
+*//* publishers[publisher];
+publishers[nintendo]
+publishers.nintendo */
