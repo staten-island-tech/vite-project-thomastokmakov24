@@ -1,60 +1,95 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-//go to NodeList.js.org. change dropdoiwn to 20 or anything that says localStorage. 
-    // <a href="https://vite.dev" target="_blank">
-    //   <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    // </a>
-    // <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-    //   <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    // </a>
-    // <h1>Hello Vite!</h1>
+import "./style.css";
+import javascriptLogo from "./javascript.svg";
+import viteLogo from "/vite.svg";
+//go to NodeList.js.org. change dropdoiwn to 20 or anything that says localStorage.
+// <a href="https://vite.dev" target="_blank">
+//   <img src="${viteLogo}" class="logo" alt="Vite logo" />
+// </a>
+// <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
+//   <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
+// </a>
+// <h1>Hello Vite!</h1>
 
-    //     <p class="read-the-docs">
-    //   Click on the Vite logo to learn more
-    // </p>//     <button id="counter" type="button"></button>
+//     <p class="read-the-docs">
+//   Click on the Vite logo to learn more
+// </p>//     <button id="counter" type="button"></button>
 // document.querySelector('#app').innerHTML = `
 //   <div >
 //     <div class="card">
-   
-//     </div>
 
+//     </div>
 
 //   </div>
 // `
-//meme plan out. find the things. display it it. Select one and not save to a list. Add text. output the meme with the text on the image. Text content. You can use url to do videos and pictures. 
-
+//meme plan out. find the things. display it it. Select one and not save to a list. Add text. output the meme with the text on the image. Text content. You can use url to do videos and pictures.
 
 const bookArray = [
-  { title: "The Joy Luck Club", author: "Amy Tan", year: 2000, read: 1 , image: "https://i.pinimg.com/originals/7e/d7/52/7ed7521603385e27b5719b7699b31d47.jpg" }, //the idea is read is T=> mark as read and to read if False.
-  { title: "The Summer Hikaru Died", author: "Mokumokuren", year: 2023, read: 2, image: "https://th.bing.com/th/id/OIP.BoehT_tAJalkya1TIoraGAHaKe?w=186&h=263&c=7&r=0&o=7&pid=1.7&rm=3" },
-  { title: "1984", author: "George Orwell", year: 1949, read: 3 , image: "https://th.bing.com/th/id/OIP.er1VXwv6qs9hs5SAsjJ-XwHaMi?w=186&h=315&c=7&r=0&o=7&pid=1.7&rm=3"},
-  { title: "DBZ", author: "Akira Toriyama", year: 1989, read: 4, image: "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3" },
-  { title: "Trials of Apollo", author: "Rick Riordan", year: 2016, read: 5, image: "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3" },
-  { 
-  title: "The Warded Man", 
-  author: "Peter V. Brett", 
-  year: 2008, 
-  read: 3, 
-  image: "https://th.bing.com/th/id/OIP.dUz9zTTw2cAQFoYXjABfdAHaLH?w=130&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1https://th.bing.com/th/id/OIP.aJ5vwSboBJdJh3Ry7SqXoQHaH_?w=203&h=219&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
-},
+  {
+    title: "The Joy Luck Club",
+    author: "Amy Tan",
+    year: 2000,
+    read: 1,
+    image:
+      "https://i.pinimg.com/originals/7e/d7/52/7ed7521603385e27b5719b7699b31d47.jpg",
+  }, //the idea is read is T=> mark as read and to read if False.
+  {
+    title: "The Summer Hikaru Died",
+    author: "Mokumokuren",
+    year: 2023,
+    read: 2,
+    image:
+      "https://th.bing.com/th/id/OIP.BoehT_tAJalkya1TIoraGAHaKe?w=186&h=263&c=7&r=0&o=7&pid=1.7&rm=3",
+  },
+  {
+    title: "1984",
+    author: "George Orwell",
+    year: 1949,
+    read: 3,
+    image:
+      "https://th.bing.com/th/id/OIP.er1VXwv6qs9hs5SAsjJ-XwHaMi?w=186&h=315&c=7&r=0&o=7&pid=1.7&rm=3",
+  },
+  {
+    title: "DBZ",
+    author: "Akira Toriyama",
+    year: 1989,
+    read: 4,
+    image:
+      "https://th.bing.com/th/id/OIP.7bEKefwm73Nn_g2eBSuKEQHaLH?w=186&h=279&c=7&r=0&o=7&pid=1.7&rm=3",
+  },
+  {
+    title: "Trials of Apollo",
+    author: "Rick Riordan",
+    year: 2016,
+    read: 5,
+    image:
+      "https://th.bing.com/th/id/OIP.j0BqORCtvpx0gO5FYoo-CQHaJ4?w=129&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+  },
+  {
+    title: "The Warded Man",
+    author: "Peter V. Brett",
+    year: 2008,
+    read: 3,
+    image:
+      "https://th.bing.com/th/id/OIP.dUz9zTTw2cAQFoYXjABfdAHaLH?w=130&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1https://th.bing.com/th/id/OIP.aJ5vwSboBJdJh3Ry7SqXoQHaH_?w=203&h=219&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
+  },
 
-{ 
-  title: "Frieren: Beyond Journey’s End", 
-  author: "Kanehito Yamada", 
-  year: 2020, 
-  read: 5, 
-  image: "https://th.bing.com/th/id/OIP.MyaFr4d_d3gupaRWVsJR9wHaLH?w=203&h=304&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
-},
+  {
+    title: "Frieren: Beyond Journey’s End",
+    author: "Kanehito Yamada",
+    year: 2020,
+    read: 5,
+    image:
+      "https://th.bing.com/th/id/OIP.MyaFr4d_d3gupaRWVsJR9wHaLH?w=203&h=304&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
+  },
 
-{ 
-  title: "Chainsaw Man", 
-  author: "Tatsuki Fujimoto", 
-  year: 2018, 
-  read: 2, 
-  image: "https://th.bing.com/th/id/OIP.B1SPIi7WfsggDibRU6t_LQHaLh?w=115&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1" 
-}
-
+  {
+    title: "Chainsaw Man",
+    author: "Tatsuki Fujimoto",
+    year: 2018,
+    read: 2,
+    image:
+      "https://th.bing.com/th/id/OIP.B1SPIi7WfsggDibRU6t_LQHaLh?w=115&h=180&c=7&r=0&o=7&cb=ucfimg2&pid=1.7&rm=3&ucfimg=1",
+  },
 ];
 const containerEl = document.querySelector(".container");
 /* const listEl = document.getElementById("character-list");
@@ -74,23 +109,39 @@ bookArray.forEach(book => {
 
   listEl.appendChild(wrapper);
 }); */
-//images book covers. Put the two lists on screen preferrableyside by side but top and bottom is fine. Have 
-let tobuybucket = [];let toreadbucket = [];let currentbucket = [];let readbucket = [];let againbucket = [];
+//images book covers. Put the two lists on screen preferrableyside by side but top and bottom is fine. Have
+let tobuybucket = [];
+let toreadbucket = [];
+let currentbucket = [];
+let readbucket = [];
+let againbucket = [];
 function readLabelFromValue(v) {
   switch (Number(v)) {
-    case 1: return "tobuy";
-    case 2: return "toread";
-    case 3: return "current";
-    case 4: return "read";
-    case 5: return "again";
-    default: return "tobuy";
+    case 1:
+      return "tobuy";
+    case 2:
+      return "toread";
+    case 3:
+      return "current";
+    case 4:
+      return "read";
+    case 5:
+      return "again";
+    default:
+      return "tobuy";
   }
-}   //     <div class="stateDisplay"><span class="stateLabel">${label}</span></div>
+} //     <div class="stateDisplay"><span class="stateLabel">${label}</span></div>
 function inject(cry) {
   const numberv = readLabelFromValue(cry.read);
   containerEl.insertAdjacentHTML(
     "beforeend",
-    `<div class="card" data-title="${escapeHtml(cry.title)}" data-author="${escapeHtml(cry.author)}" data-year="${cry.year}" data-read="${cry.read}" data-state="${numberv}" data-image="${cry.image}">
+    `<div class="card" data-title="${escapeHtml(
+      cry.title
+    )}" data-author="${escapeHtml(cry.author)}" data-year="${
+      cry.year
+    }" data-read="${cry.read}" data-state="${numberv}" data-image="${
+      cry.image
+    }">
         <img class="cardImg" src="${cry.image}" alt="${escapeHtml(cry.title)}"/>
         <button class="btn">FakeCycle</button>
 
@@ -100,12 +151,22 @@ function inject(cry) {
       </div>`
   );
 }
+
+let omAnNerf = [];
+function addToCart2(example) {
+  //let omAnNerf = [];
+  omAnNerf.unshift(example);
+}
+
 function renderBooks(list = bookArray) {
   containerEl.innerHTML = ""; // remove existing cards (keeps control buttons if they live elsewhere)
   // If your control buttons are inside the same container, ensure they are re-inserted or move controls outside container.
   list.forEach(inject);
   // keep grid columns consistent with how many cards are shown
-  containerEl.style.gridTemplateColumns = `repeat(${Math.max(1, list.length)}, 220px)`;
+  containerEl.style.gridTemplateColumns = `repeat(${Math.max(
+    1,
+    list.length
+  )}, 220px)`;
   containerEl.style.gridAutoRows = "minmax(200px, auto)";
 }
 
@@ -117,12 +178,12 @@ function renderBooks(list = bookArray) {
 //         <img class="cardImg" src=${cry.image} alt="mimimimimi"/>
 //         <button class = "btn">FakeCycle</button>
 //         <div class="cycleDisplay">Cycle: <span class="cycleNum">${cry.read}</span></div>
-//         <h2 >${cry.title}</h2>         
-//         <h2 >Released:${cry.year}</h2>    
+//         <h2 >${cry.title}</h2>
+//         <h2 >Released:${cry.year}</h2>
 //         <h2 class = "cardPrice" >${cry.author}</h2>
 //         </div>`,
 //   );
-// } 
+// }
 //bookArray.forEach((book) => {
 //  inject(book);
 //});\
@@ -133,9 +194,12 @@ function rebuildBuckets() {
   readbucket = [];
   againbucket = [];
 
-  bookArray.forEach(book => {
+  bookArray.forEach((book) => {
     let r = Number(book.read) || 1;
-    if (r < 1 || r > 5) { r = 1; book.read = 1; }
+    if (r < 1 || r > 5) {
+      r = 1;
+      book.read = 1;
+    }
     const label = readLabelFromValue(r);
     if (label === "tobuy") tobuybucket.push(book);
     else if (label === "toread") toreadbucket.push(book);
@@ -145,7 +209,7 @@ function rebuildBuckets() {
   });
 }
 function findBookByTitle(title) {
-  return bookArray.find(b => b.title === title);
+  return bookArray.find((b) => b.title === title);
 }
 // function findBookByTitle(title) {
 //   return bookArray.find(b => b.title === title);
@@ -154,12 +218,12 @@ function findBookByTitle(title) {
 // update only the card UI for one book
 function updateCardDisplay(card, book) {
   card.dataset.read = String(book.read);
-  const labelEl = card.querySelector('.stateLabel');
+  const labelEl = card.querySelector(".stateLabel");
   if (labelEl) labelEl.textContent = readLabelFromValue(book.read);
   card.dataset.state = readLabelFromValue(book.read);
-
 }
 // delegated click listener for per-card FakeCycle button
+function cyclebutton() {
 containerEl.addEventListener("click", (e) => {
   if (!e.target.matches(".btn")) return;
   const card = e.target.closest(".card");
@@ -174,7 +238,12 @@ containerEl.addEventListener("click", (e) => {
   // update this card and buckets
   updateCardDisplay(card, book);
   rebuildBuckets();
+  console.log(tobuybucket, toreadbucket, currentbucket, readbucket, againbucket);
+  console.log("wassup guys");
 });
+}
+cyclebutton();//my buckeet and adding to bucket functions are all good
+console.log("ssr");
 // // function findBookByTitle(title) {
 // //   return bookArray.find(b => b.title === title);
 // // }
@@ -322,8 +391,6 @@ setupFilterButtons();
 //             else if ((book.read) > 5) {
 //               book.read = 1;}  }
 
-
-
 // //cycle(bookArray.forEach(book));
 // bookArray.forEach(button)//GPT WAS HELPED WITH THIS ONE (just how to call it)
 
@@ -333,33 +400,10 @@ setupFilterButtons();
 // console.log("Books Read:", readbucket);
 // console.log("Books To Read:", toreadbucket);
 
-
-
 // bookArray.forEach(cycle);
 // //slip(book);//one = is setting it to be something else and comparing is two ==. is it was a variable of a string, do ===
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /*  
+// /*
 // // async function getData(){
 // try{
 //   const response = await fetch(`https://`);//go get data
@@ -374,7 +418,6 @@ setupFilterButtons();
 // }}getData();
 
 // ///data.__.forEach...
-
 
 // //flowbite, DaisyUi, tailwind component library
 // */
