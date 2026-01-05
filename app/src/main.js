@@ -296,6 +296,11 @@ function escapeHtml(str) {
 rebuildBuckets();
 renderBooks(); // show all by default
 setupFilterButtons();
+
+
+/* function functon(x,y,z){
+}
+functon(book.read, book.title, book.image); */
 // //readLabelFromValue();
 // // set explicit columns: one column per object (single row). Change 220px if you change .card width.
 // //containerEl.style.gridTemplateColumns = `repeat(${bookArray.length}, 220px)`;
