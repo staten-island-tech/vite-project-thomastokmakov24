@@ -222,6 +222,18 @@ function updateCardDisplay(card, book) {
   if (labelEl) labelEl.textContent = readLabelFromValue(book.read);
   card.dataset.state = readLabelFromValue(book.read);
 }
+
+function filterByGenre(genre) {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card)=>{
+    const cardCategory = (card.dataset.genre).toLowerCase();  /* || "" */
+if (cardCategory === (genre).toLowerCase()) {/*  || "" */
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
 // delegated click listener for per-card FakeCycle button
 function cyclebutton() {
 containerEl.addEventListener("click", (e) => {
