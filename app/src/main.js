@@ -153,39 +153,63 @@ function inject(cry) {
 }
 
 const container = document.querySelector(".container");
-
+/* 
 bookArray.forEach(item => {
   const div = document.createElement("div");
   div.textContent = item.title;
   div.classList.add("item");
-  div.dataset.read = item.read; // 👈 key line
+  div.dataset.read = item.read; //  impo line
   container.appendChild(div);
 });
 
 const buttons = document.querySelectorAll("button[data-read]");
-const itemsInDOM = document.querySelectorAll(".item");
+const itemsInDOM = document.querySelectorAll(".item"); 
+ */
+function filterByGenre(genre) {
+  const cards = document.querySelectorAll(".card");
 
-function filterByRead(read) {
-  itemsInDOM.forEach(item => {
-    if (item.dataset.read === read) {
-      item.style.display = "block";
+
+/*   cards.forEach(card => {
+    if (card.dataset.read === String(read)) {
+      card.style.display = "block";
     } else {
-      item.style.display = "none";
+      card.style.display = "none";
+    }
+  });
+} */
+
+  cards.forEach(card => {
+    if (genre === "all" || card.dataset.state === genre) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
     }
   });
 }
+
+/* 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
     const read = button.dataset.read;
     filterByRead(read);
   });
-});
+}); */
 
-document.querySelector("#show-all").addEventListener("click", () => {
+
+/* document.querySelector("#show-all").addEventListener("click", () => {
   itemsInDOM.forEach(item => {
     item.style.display = "block";
   });
-});
+}); */  //nextthingwil replace ts
+
+function setupFilterButtons() {
+  document.querySelectorAll(".fbtn").forEach(button => {
+    button.addEventListener("click", () => {
+      const genre = button.dataset.genre;
+      filterByGenre(genre);
+    });
+  });
+}
 
 
 
