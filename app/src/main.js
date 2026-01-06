@@ -152,6 +152,43 @@ function inject(cry) {
   );
 }
 
+const container = document.querySelector(".container");
+
+bookArray.forEach(item => {
+  const div = document.createElement("div");
+  div.textContent = item.title;
+  div.classList.add("item");
+  div.dataset.read = item.read; // 👈 key line
+  container.appendChild(div);
+});
+
+const buttons = document.querySelectorAll("button[data-read]");
+const itemsInDOM = document.querySelectorAll(".item");
+
+function filterByRead(read) {
+  itemsInDOM.forEach(item => {
+    if (item.dataset.read === read) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const read = button.dataset.read;
+    filterByRead(read);
+  });
+});
+
+document.querySelector("#show-all").addEventListener("click", () => {
+  itemsInDOM.forEach(item => {
+    item.style.display = "block";
+  });
+});
+
+
+
 let omAnNerf = [];
 function addToCart2(example) {
   //let omAnNerf = [];
