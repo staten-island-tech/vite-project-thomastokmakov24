@@ -1,3 +1,14 @@
+/* light and dark modes but only for the background and txt color, not for everything */
+body.light {
+  background-color: #ffffff !important;/* this thing means that no matter what other css say, this one will go through. 'important type' */
+  color: #000000 !important;
+}
+body.dark {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

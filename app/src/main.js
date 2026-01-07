@@ -115,7 +115,7 @@ let toreadbucket = [];
 let currentbucket = [];
 let readbucket = [];
 let againbucket = [];
-function readLabelFromValue(v) {
+function readLabelFromValue(v) {/// i should prolly del this tbh. its like going form 1->baby -> function based on baby. I could just make it based on 1 but i thought that i would use this eventually but nah
   switch (Number(v)) {
     case 1:
       return "tobuy";
@@ -212,22 +212,25 @@ function setupFilterButtons() {
 }
 
 
-
+/* 
 let omAnNerf = [];
 function addToCart2(example) {
   //let omAnNerf = [];
   omAnNerf.unshift(example);
 }
-
+ */
 function renderBooks(list = bookArray) {
   containerEl.innerHTML = ""; // remove existing cards (keeps control buttons if they live elsewhere)
   // If your control buttons are inside the same container, ensure they are re-inserted or move controls outside container.
   list.forEach(inject);
   // keep grid columns consistent with how many cards are shown
-  containerEl.style.gridTemplateColumns = `repeat(${Math.max(
+/*   containerEl.style.gridTemplateColumns = `repeat(${Math.max(
     1,
     list.length
-  )}, 220px)`;
+  )}, 220px)`; *///this one explodes when i tried to filter the one itme it worked
+
+  containerEl.style.gridTemplateColumns = "repeat(auto-fill, 220px)";
+
   containerEl.style.gridAutoRows = "minmax(200px, auto)";
 }
 
@@ -284,18 +287,18 @@ function updateCardDisplay(card, book) {
   card.dataset.state = readLabelFromValue(book.read);
 }
 
-function filterByGenre(genre) {
-  const cards = document.querySelectorAll(".card");
-  cards.forEach((card)=>{
-    const cardCategory = (card.dataset.genre).toLowerCase();  /* || "" */
-if (cardCategory === (genre).toLowerCase()) {/*  || "" */
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-// delegated click listener for per-card FakeCycle button
+// function filterByGenre(genre) {
+//   const cards = document.querySelectorAll(".card");
+//   cards.forEach((card)=>{
+//     const cardCategory = (card.dataset.genre).toLowerCase();  /* || "" */
+// if (cardCategory === (genre).toLowerCase()) {/*  || "" */
+//       card.style.display = "";
+//     } else {
+//       card.style.display = "none";
+//     }
+//   });
+// }
+// //////////////////////////////////////////////////////////////////delegated click listener for per-card FakeCycle button
 function cyclebutton() {
 containerEl.addEventListener("click", (e) => {
   if (!e.target.matches(".btn")) return;
@@ -315,7 +318,7 @@ containerEl.addEventListener("click", (e) => {
   console.log("wassup guys");
 });
 }
-cyclebutton();//my buckeet and adding to bucket functions are all good
+
 console.log("ssr");
 // // function findBookByTitle(title) {
 // //   return bookArray.find(b => b.title === title);
@@ -345,7 +348,7 @@ console.log("ssr");
 //   updateCardDisplay(card, book);
 //   rebuildBuckets();
 //});
-function setupFilterButtons() {
+/* function setupFilterButtons() {
   const filterButtons = document.querySelectorAll(".fbtn");
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -354,9 +357,9 @@ function setupFilterButtons() {
     });
   });
 }
-
+ */ //twas one of many copies of the same shit
 // small helper to escape text into HTML attributes
-function escapeHtml(str) {
+function escapeHtml(str) {// ok i have absolutely no idea what this does but every ai and agent suggests it so must be important so imma leave it alone
   return String(str)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -364,10 +367,32 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Load saved mode
+if (localStorage.getItem("mode") === "dark") {
+    document.body.classList.add("dark");
+} else {
+    document.body.classList.add("light");
+}
+
+toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    document.body.classList.toggle("light");
+
+    // Save preference
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("mode", "dark");
+    } else {
+        localStorage.setItem("mode", "light");
+    }
+});
+
 //all cards disappear w/o this
 // initial setup
 rebuildBuckets();
 renderBooks(); // show all by default
+cyclebutton();//my buckeet and adding to bucket functions are all good//was moved bc has to be fter the render. how can cyle? if ti isnt rendered yet ya?
 setupFilterButtons();
 
 
